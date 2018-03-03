@@ -30,23 +30,31 @@ module sine_wave (length, depth, height, amplitude, wavelength, resolution)
 	}
 }
 
-difference()
+module tube (inner_diameter, inner_height, floor_depth, wall_width)
 {
-	union()
+	outer_height = inner_height + floor_depth;
+	outer_diameter = inner_diameter + 2*wall_width;
+
+	difference()
 	{
-		translate([-tube_outer_diameter/2, 0, 0])
-		cube([tube_outer_diameter, tube_outer_diameter/2, tube_outer_height]);
+		union()
+		{
+			translate([-outer_diameter/2, 0, 0])
+			cube([outer_diameter, outer_diameter/2, outer_height]);
 
-		cylinder(h=tube_outer_height, d=tube_outer_diameter);
-	}
+			cylinder(h=outer_height, d=outer_diameter);
+		}
 
-	union()
-	{
-		translate([0, 0, floor_depth])
-		cylinder(h=tube_inner_height + 1, d=tube_inner_diameter);
+		union()
+		{
+			translate([0, 0, floor_depth])
+			cylinder(h=inner_height + 1, d=inner_diameter);
 
-		translate([0, 0, floor_depth])
-		rotate([90, -90, 0])
-		sine_wave(tube_inner_height + 1, tube_inner_diameter, slot_width, tube_inner_diameter / 4, slot_wavelength, 0.1);
+			translate([0, 0, floor_depth])
+			rotate([90, -90, 0])
+			sine_wave(inner_height + 1, inner_diameter, slot_width, inner_diameter / 4, slot_wavelength, 0.1);
+		}
 	}
 }
+
+tube(tube_inner_diameter, tube_inner_height, floor_depth, wall_width);
