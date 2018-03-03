@@ -8,9 +8,7 @@ coin_depth_space = 0.05;
 wall_width = 1;
 floor_depth = 1;
 
-slot_height = coin_depth + coin_depth_space * 2;
-
-tube_inner_height = coin_depth * number_of_coins + coin_depth_space * (number_of_coins - 1) + slot_height;
+tube_inner_height = coin_depth * number_of_coins + coin_depth_space * (number_of_coins - 1);
 tube_inner_diameter = coin_diameter + coin_diameter_space;
 
 tube_outer_height = tube_inner_height + floor_depth;
