@@ -18,6 +18,7 @@ slot_width = 1;
 slot_wavelength = 25;
 
 $fn = 90;
+slot_resolution = 0.7;
 
 module sine_wave (length, depth, height, amplitude, wavelength, resolution)
 {
@@ -50,7 +51,7 @@ module tube (inner_diameter, inner_height, floor_depth, wall_width)
 
 			translate([0, 0, floor_depth])
 			rotate([90, -90, 0])
-			sine_wave(inner_height + 1, inner_diameter, slot_width, inner_diameter / 4, slot_wavelength, 0.1);
+			sine_wave(inner_height + 1, inner_diameter, slot_width, inner_diameter / 4, slot_wavelength, slot_resolution);
 		}
 	}
 }
