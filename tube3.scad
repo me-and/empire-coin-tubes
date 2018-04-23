@@ -1,5 +1,5 @@
-coin_diameter = 10;
-coin_depth = 1;
+coin_diameter = 20;
+coin_depth = 2;
 number_of_coins = 20;
 
 coin_diameter_space = 0.5;
