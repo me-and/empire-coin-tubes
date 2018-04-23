@@ -20,6 +20,8 @@ slot_wavelength = 25;
 $fn = 90;
 slot_resolution = 0.7;
 
+slack = 1;
+
 module sine_wave (length, depth, height, amplitude, wavelength, resolution)
 {
 	for(i=[0:(length / resolution)])
@@ -48,11 +50,11 @@ module tube (inner_diameter, inner_height, floor_depth, wall_width)
 		union()
 		{
 			translate([0, 0, floor_depth])
-			cylinder(h=inner_height + 1, d=inner_diameter);
+			cylinder(h=inner_height + slack, d=inner_diameter);
 
 			translate([0, 0, floor_depth])
 			rotate([90, -90, 0])
-			sine_wave(inner_height + 1, inner_diameter, slot_width, slot_amplitude, slot_wavelength, slot_resolution);
+			sine_wave(inner_height + slack, inner_diameter, slot_width, slot_amplitude, slot_wavelength, slot_resolution);
 		}
 	}
 }
