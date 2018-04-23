@@ -11,6 +11,11 @@ floor_depth = 1;
 tube_inner_height = coin_depth * number_of_coins + coin_depth_space * (number_of_coins - 1);
 tube_inner_diameter = coin_diameter + coin_diameter_space;
 
+floor_slot_diameter = tube_inner_diameter / 2;
+
+coin_slot_height = coin_depth + 2*coin_depth_space;
+coin_slot_lip = coin_depth / 2;
+
 tube_outer_height = tube_inner_height + floor_depth;
 tube_outer_diameter = tube_inner_diameter + wall_width;
 
@@ -59,4 +64,28 @@ module tube (inner_diameter, inner_height, floor_depth, wall_width)
 	}
 }
 
-tube(tube_inner_diameter, tube_inner_height, floor_depth, wall_width);
+difference()
+{
+	tube(tube_inner_diameter, tube_inner_height, floor_depth, wall_width);
+
+	union()
+	{
+		translate([0, 0, -slack])
+		hull()
+		{
+			cylinder(h=2*slack + floor_depth + coin_slot_lip, d=floor_slot_diameter);
+
+			translate([0, -tube_inner_diameter, 0])
+			cylinder(h=2*slack + floor_depth + coin_slot_lip, d=floor_slot_diameter);
+		}
+
+		translate([0, 0, floor_depth + coin_slot_lip])
+		hull()
+		{
+			cylinder(h=coin_slot_height, d=tube_inner_diameter);
+
+			translate([0, -tube_inner_diameter, 0])
+			cylinder(h=coin_slot_height, d=tube_inner_diameter);
+		}
+	}
+}
