@@ -33,6 +33,7 @@ module tube (inner_diameter, inner_height, floor_depth, wall_width)
 {
 	outer_height = inner_height + floor_depth;
 	outer_diameter = inner_diameter + 2*wall_width;
+	slot_amplitude = inner_diameter / 4;
 
 	difference()
 	{
@@ -51,7 +52,7 @@ module tube (inner_diameter, inner_height, floor_depth, wall_width)
 
 			translate([0, 0, floor_depth])
 			rotate([90, -90, 0])
-			sine_wave(inner_height + 1, inner_diameter, slot_width, inner_diameter / 4, slot_wavelength, slot_resolution);
+			sine_wave(inner_height + 1, inner_diameter, slot_width, slot_amplitude, slot_wavelength, slot_resolution);
 		}
 	}
 }
